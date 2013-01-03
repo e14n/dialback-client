@@ -129,11 +129,11 @@ var dialbackAuth = function(req, res, next) {
     var auth,
         now = Date.now(),
         fields,
-        unauthorized = function() {
+        unauthorized = function(reason) {
             res.status(401);
             res.setHeader("WWW-Authentication", "Dialback");
             res.setHeader("Content-Type", "text/plain");
-            res.send("Unauthorized");
+            res.send(reason);
         },
         parseFields = function(str) {
             var fstr = str.substr(9); // everything after "Dialback "
@@ -156,7 +156,7 @@ var dialbackAuth = function(req, res, next) {
     auth = req.headers.authorization;
 
     if (auth.substr(0, 9) != "Dialback ") {
-        unauthorized();
+        unauthorized("Dialback authorization required");
         return;
     }
 
@@ -165,28 +165,34 @@ var dialbackAuth = function(req, res, next) {
     // must have a token
 
     if (!fields.hasOwnProperty("token")) {
-        unauthorized();
+        unauthorized("No token");
         return;
     }
 
     // must have a webfinger or host field
 
     if (!fields.hasOwnProperty("host") && !fields.hasOwnProperty("webfinger")) {
-        unauthorized();
+        unauthorized("No ID");
         return;
     }
 
     if (!req.headers.hasOwnProperty("date")) {
-        unauthorized();
+        unauthorized("No Date");
         return;
     }
 
     fields.date = req.headers.date;
 
     if (Math.abs(Date.parse(fields.date) - now) > 300000) { // 5-minute window
-        unauthorized();
+        unauthorized("Date is too old");
         return;
     }
+
+    fields.url = url.format({
+        hostname: req.headers.host,
+        pathname: req.originalUrl,
+        protocol: "http"
+    });
 
     Step(
         function() {
@@ -198,7 +204,7 @@ var dialbackAuth = function(req, res, next) {
         },
         function(err, body, res) {
             if (err) {
-                unauthorized();
+                unauthorized(err.message);
             } else if (fields.hasOwnProperty("host")) {
                 req.remoteHost = fields.host;
                 next();

@@ -90,6 +90,8 @@ suite.addBatch({
 
                     app = express.createServer();
 
+                    app.use(express.bodyParser());
+
                     app.get("/.well-known/host-meta.json", function(req, res, next) {
                         res.json({
                             links: [
@@ -143,6 +145,7 @@ suite.addBatch({
                 "echo data includes token and id": function(err, res, body) {
                     var parts;
                     assert.ifError(err);
+                    assert.equal(res.statusCode, 200);
                     assert.isTrue(res.headers["content-type"].substr(0, "application/json".length) == "application/json");
                     try {
                         parts = JSON.parse(body);

@@ -1,0 +1,32 @@
+{
+    "name": "dialback-client",
+    "homepage": "http://github.com/e14n/dialback-client",
+    "version": "0.1.0",
+    "author": "Evan Prodromou <evan@e14n.com>",
+    "devDependencies": {
+        "vows": "0.6.x",
+        "webfinger": "0.1.x"
+    },
+    "dependencies": { "express": "2.5.x",
+                      "underscore": "1.4.x", 
+		      "databank": "0.15.x",
+                      "step": "0.0.x"
+		    },
+    "scripts": {
+        "test": "vows test/*-test.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/e14n/dialback-client.git"
+    },
+    "keywords": ["dialback", "authorization", "authentication", "http"],
+    "licenses": [
+        {
+            "type": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    ],
+    "engine": {
+        "node": "0.8.x"
+    }
+}

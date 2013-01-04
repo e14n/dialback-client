@@ -63,6 +63,12 @@ suite.addBatch({
                 "it works": function(DialbackClient) {
                     assert.isFunction(DialbackClient);
                 },
+                "it has a schema member": function(DialbackClient) {
+                    assert.isObject(DialbackClient.schema);
+                },
+                "it has a DialbackRequest member": function(DialbackClient) {
+                    assert.isFunction(DialbackClient.DialbackRequest);
+                },
                 "and we create a client": {
                     topic: function(DialbackClient, app, db) {
                         var client = new DialbackClient({

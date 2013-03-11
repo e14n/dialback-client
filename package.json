@@ -1,7 +1,7 @@
 {
     "name": "dialback-client",
     "homepage": "http://github.com/e14n/dialback-client",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "author": "Evan Prodromou <evan@e14n.com>",
     "devDependencies": {
         "vows": "0.6.x",
@@ -9,7 +9,7 @@
     },
     "dependencies": { "express": "2.5.x",
                       "underscore": "1.4.x", 
-		      "databank": "0.15.x",
+		      "databank": "0.16.x",
                       "step": "0.0.x"
 		    },
     "scripts": {

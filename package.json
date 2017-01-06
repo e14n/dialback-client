@@ -10,7 +10,7 @@
     },
     "dependencies": { "underscore": "1.5.x", 
 		      "databank": "0.19.x",
-                      "step": "0.0.x"
+                      "step": "^1.0.0"
 		    },
     "scripts": {
         "test": "vows test/*-test.js"
@@ -20,12 +20,7 @@
         "url": "git://github.com/e14n/dialback-client.git"
     },
     "keywords": ["dialback", "authorization", "authentication", "http"],
-    "licenses": [
-        {
-            "type": "Apache 2.0",
-            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
-        }
-    ],
+    "license": "Apache-2.0",
     "engine": {
         "node": "0.8.x"
     },
